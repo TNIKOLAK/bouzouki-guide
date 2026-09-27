@@ -1,7 +1,3 @@
-# python APP_260708_4_online_1.PY
-# pyinstaller --onefile --windowed APP_260708_4.py
-# streamlit run APP_260708_4_online_1.py
-
 import streamlit as st
 import random
 from PIL import Image
@@ -18,18 +14,21 @@ notes = ["ΝΤΟ", "ΡΕ", "ΜΙ", "ΦΑ", "ΣΟΛ", "ΛΑ", "ΣΙ"]
 
 # 1. Λίστα με τους πλήρεις Δρόμους
 dromoi = {
-    "Αρμονικό Μινόρε": "ARMONIKO_MINORE.png",
     "Φυσικό Μινόρε": "FYSIKO_MINORE.png",
-    "Γιουρού (Εκδοχή 1)": "GIOURNTI_9_notes_1.png",
-    "Γιουρού (Εκδοχή 2)": "GIOURNTI_9_notes_2.png",
-    "Καρτσιγάρ": "KARTSIGAR.png",
-    "Νιαβέντ": "NIAVENT.png",
+    "Αρμονικό Μινόρε": "ARMONIKO_MINORE.png",
+    "Νιαβέντ": "NIAVENT.png",    
     "Νικρίζ (Ποιμενικό Μινόρε)": "NIKRIZ_or_POIMENIKO_MINORE.png",
-    "Ραστ / Ματζόρε": "MAJORE_or_RAST.png",
-    "Σεγκιάχ": "SEGKIAX.png",
-    "Χιτζασκιάρ": "XITZASKIAR.png",
-    "Χιτζάζ": "XITZAZ.png",
-    "Χουζάμ": "XOUZAM.png"
+    "Χιτζάζ": "XITZAZ.png",    
+    "Χιτζασκιάρ": "XITZASKIAR.png",    
+    "Πειραιώτικος": "PEIRAIOTIKOS.png",    
+    "Ραστ/Ματζόρε": "MAJORE_or_RAST.png",    
+    "Χουζάμ": "XOUZAM.png",    
+    "Σεγκιάχ": "SEGKIAX.png",        
+    "Ουσάκ": "OUSAK.png",    
+    "Σαμπάχ": "SABAX.png",    
+    "Καρτσιγάρ": "KARTSIGAR.png",    
+    "Γιουρντί (Εκδοχή 1)": "GIOURNTI_9_notes_1.png",
+    "Γιουρντί (Εκδοχή 2)": "GIOURNTI_9_notes_2.png"
 }
 
 # 2. Λίστα με τα Σχήματα / Παραλλαγές
@@ -38,15 +37,12 @@ sximata = {
     "Ματζόρε / Ραστ (7 Νότες)": "MAJORE_or_RAST_7_notes.png",
     "Μινόρε (5 Νότες)": "MINORE_5_notes.png",
     "Μινόρε (7 Νότες)": "MINORE_7_notes.png",
-    "Ουσάκ (Γενικό)": "OUSAK.png",
     "Ουσάκ (5 Νότες - Εκδ. 1)": "OUSAK_5_notes_1.png",
     "Ουσάκ (5 Νότες - Εκδ. 2)": "OUSAK_5_notes_2.png",
     "Ουσάκ (7 Νότες - Εκδ. 1)": "OUSAK_7_notes_1.png",
     "Ουσάκ (7 Νότες - Εκδ. 2)": "OUSAK_7_notes_2.png",
-    "Πειραιώτικος (Γενικό)": "PEIRAIOTIKOS.png",
     "Πειραιώτικος (6 Νότες)": "PEIRAIOTIKOS_6_notes.png",
     "Πειραιώτικος (9 Νότες)": "PEIRAIOTIKOS_9_notes.png",
-    "Σαμπάχ (Γενικό)": "SABAX.png",
     "Σαμπάχ (5 Νότες)": "SABAX_5_notes.png",
     "Σαμπάχ (7 Νότες)": "SABAX_7_notes.png",
     "Χιτζάζ (5 Νότες)": "XITZAZ_5_notes.png",
