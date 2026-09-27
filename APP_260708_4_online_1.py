@@ -12,24 +12,39 @@ st.write("Επιλέξτε μια ενότητα από τις παρακάτω 
 # Λίστα με τις νότες για το Quiz
 notes = ["ΝΤΟ", "ΡΕ", "ΜΙ", "ΦΑ", "ΣΟΛ", "ΛΑ", "ΣΙ"]
 
-# 1. Λίστα με τους πλήρεις Δρόμους
-dromoi = {
-    "Φυσικό Μινόρε": "FYSIKO_MINORE.png",
-    "Αρμονικό Μινόρε": "ARMONIKO_MINORE.png",
-    "Νιαβέντ": "NIAVENT.png",    
-    "Νικρίζ (Ποιμενικό Μινόρε)": "NIKRIZ_or_POIMENIKO_MINORE.png",
-    "Χιτζάζ": "XITZAZ.png",    
-    "Χιτζασκιάρ": "XITZASKIAR.png",    
-    "Πειραιώτικος": "PEIRAIOTIKOS.png",    
-    "Ραστ/Ματζόρε": "MAJORE_or_RAST.png",    
-    "Χουζάμ": "XOUZAM.png",    
-    "Σεγκιάχ": "SEGKIAX.png",        
-    "Ουσάκ": "OUSAK.png",    
-    "Σαμπάχ": "SABAX.png",    
-    "Καρτσιγάρ": "KARTSIGAR.png",    
-    "Γιουρντί (Εκδοχή 1)": "GIOURNTI_9_notes_1.png",
-    "Γιουρντί (Εκδοχή 2)": "GIOURNTI_9_notes_2.png"
+# 1. Ιεραρχική οργάνωση των Δρόμων σε Οικογένειες
+oikogeneies_dromoi = {
+    "Οικογένεια Μινόρε": {
+        "Φυσικό Μινόρε": "FYSIKO_MINORE.png",
+        "Αρμονικό Μινόρε": "ARMONIKO_MINORE.png",
+        "Νιαβέντ": "NIAVENT.png",
+        "Νικρίζ (Ποιμενικό Μινόρε)": "NIKRIZ_or_POIMENIKO_MINORE.png"
+    },
+    "Οικογένεια Χιτζάζ": {
+        "Χιτζάζ": "XITZAZ.png",
+        "Χιτζασκιάρ": "XITZASKIAR.png",
+        "Πειραιώτικος": "PEIRAIOTIKOS.png"
+    },
+    "Οικογένεια Ματζόρε": {
+        "Ραστ/Ματζόρε": "MAJORE_or_RAST.png",
+        "Χουζάμ": "XOUZAM.png",
+        "Σεγκιάχ": "SEGKIAX.png"
+    },
+    "Οικογένεια Ουσάκ": {
+        "Ουσάκ": "OUSAK.png",
+        "Σαμπάχ": "SABAX.png"
+    },
+    "Οικογένεια Καρτσιγάρ": {
+        "Καρτσιγάρ": "KARTSIGAR.png",
+        "Γιουρντί (Εκδοχή 1)": "GIOURNTI_9_notes_1.png",
+        "Γιουρντί (Εκδοχή 2)": "GIOURNTI_9_notes_2.png"
+    }
 }
+
+# Επίπεδη λίστα όλων των δρόμων (για χρήση στο Quiz)
+dromoi_quiz_pool = {}
+for family_members in oikogeneies_dromoi.values():
+    dromoi_quiz_pool.update(family_members)
 
 # 2. Λίστα με τα Σχήματα / Παραλλαγές
 sximata = {
@@ -61,14 +76,27 @@ def ληψη_εικόνας(όνομα_αρχείου):
     else:
         return None
 
-# --- TAB 1: ΜΟΥΣΙΚΟΙ ΔΡΟΜΟΙ ---
+# --- TAB 1: ΜΟΥΣΙΚΟΙ ΔΡΟΜΟΙ (Ιεραρχικά Dropdowns) ---
 with tab1:
-    επιλογή_δρόμου = st.selectbox("Διαλέξτε Δρόμο:", list(dromoi.keys()), key="dromoi_select")
-    img = ληψη_εικόνας(dromoi[επιλογή_δρόμου])
+    επιλογή_οικογένειας = st.selectbox(
+        "Διαλέξτε Οικογένεια Δρόμων:", 
+        list(oikogeneies_dromoi.keys()), 
+        key="family_select"
+    )
+    
+    # Το δεύτερο dropdown διαμορφώνεται δυναμικά από τα μέλη της επιλεγμένης οικογένειας
+    διαθέσιμοι_δρόμοι = oikogeneies_dromoi[επιλογή_οικογένειας]
+    επιλογή_δρόμου = st.selectbox(
+        "Διαλέξτε Δρόμο:", 
+        list(διαθέσιμοι_δρόμοι.keys()), 
+        key="dromoi_select"
+    )
+    
+    img = ληψη_εικόνας(διαθέσιμοι_δρόμοι[επιλογή_δρόμου])
     if img:
         st.image(img, use_container_width=True)
     else:
-        st.error(f"Δεν βρέθηκε η εικόνα: {dromoi[επιλογή_δρόμου]}")
+        st.error(f"Δεν βρέθηκε η εικόνα: {διαθέσιμοι_δρόμοι[επιλογή_δρόμου]}")
 
 # --- TAB 2: ΣΧΗΜΑΤΑ ---
 with tab2:
@@ -84,7 +112,7 @@ with tab3:
     st.subheader("🎲 Τυχαία Εξάσκηση στους Δρόμους")
     if st.button("🎲 Νέα Τυχαία Επιλογή Δρόμου", key="btn_quiz_d"):
         st.session_state.quiz_nota_d = random.choice(notes)
-        st.session_state.quiz_name_d = random.choice(list(dromoi.keys()))
+        st.session_state.quiz_name_d = random.choice(list(dromoi_quiz_pool.keys()))
         st.session_state.show_img_d = False # Κρύψε την προηγούμενη εικόνα
     
     if "quiz_nota_d" in st.session_state:
@@ -93,7 +121,7 @@ with tab3:
             st.session_state.show_img_d = True
             
         if st.session_state.get("show_img_d", False):
-            img = ληψη_εικόνας(dromoi[st.session_state.quiz_name_d])
+            img = ληψη_εικόνας(dromoi_quiz_pool[st.session_state.quiz_name_d])
             if img:
                 st.image(img, use_container_width=True)
 
