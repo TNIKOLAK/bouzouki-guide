@@ -41,6 +41,11 @@ oikogeneies_dromoi = {
     }
 }
 
+# Αντιστοίχιση δρόμων με video (μπορείς να προσθέσεις κι άλλα στο μέλλον)
+dromoi_videos = {
+    "Φυσικό Μινόρε": "fysiko_minore_2.mp4"
+}
+
 # Επίπεδη λίστα όλων των δρόμων (για χρήση στο Quiz)
 dromoi_quiz_pool = {}
 for family_members in oikogeneies_dromoi.values():
@@ -76,7 +81,7 @@ def ληψη_εικόνας(όνομα_αρχείου):
     else:
         return None
 
-# --- TAB 1: ΜΟΥΣΙΚΟΙ ΔΡΟΜΟΙ (Ιεραρχικά Dropdowns) ---
+# --- TAB 1: ΜΟΥΣΙΚΟΙ ΔΡΟΜΟΙ (Ιεραρχικά Dropdowns & Video) ---
 with tab1:
     επιλογή_οικογένειας = st.selectbox(
         "Διαλέξτε Οικογένεια Δρόμων:", 
@@ -84,7 +89,6 @@ with tab1:
         key="family_select"
     )
     
-    # Το δεύτερο dropdown διαμορφώνεται δυναμικά από τα μέλη της επιλεγμένης οικογένειας
     διαθέσιμοι_δρόμοι = oikogeneies_dromoi[επιλογή_οικογένειας]
     επιλογή_δρόμου = st.selectbox(
         "Διαλέξτε Δρόμο:", 
@@ -97,6 +101,15 @@ with tab1:
         st.image(img, use_container_width=True)
     else:
         st.error(f"Δεν βρέθηκε η εικόνα: {διαθέσιμοι_δρόμοι[επιλογή_δρόμου]}")
+
+    # Έλεγχος και εμφάνιση video αν υπάρχει συνδεδεμένο αρχείο για τον επιλεγμένο δρόμο
+    if επιλογή_δρόμου in dromoi_videos:
+        video_file = dromoi_videos[επιλογή_δρόμου]
+        if os.path.exists(video_file):
+            with st.expander("🎬 Δείτε το επεξηγηματικό video"):
+                st.video(video_file)
+        else:
+            st.warning(f"Το video '{video_file}' δεν βρέθηκε στον φάκελο.")
 
 # --- TAB 2: ΣΧΗΜΑΤΑ ---
 with tab2:
@@ -113,7 +126,7 @@ with tab3:
     if st.button("🎲 Νέα Τυχαία Επιλογή Δρόμου", key="btn_quiz_d"):
         st.session_state.quiz_nota_d = random.choice(notes)
         st.session_state.quiz_name_d = random.choice(list(dromoi_quiz_pool.keys()))
-        st.session_state.show_img_d = False # Κρύψε την προηγούμενη εικόνα
+        st.session_state.show_img_d = False
     
     if "quiz_nota_d" in st.session_state:
         st.info(f"**ΠΑΙΞΤΕ:** Νότα **{st.session_state.quiz_nota_d}** και Δρόμο **{st.session_state.quiz_name_d}**")
