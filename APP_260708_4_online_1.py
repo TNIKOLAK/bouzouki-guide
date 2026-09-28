@@ -45,7 +45,8 @@ oikogeneies_dromoi = {
 
 # Αντιστοίχιση δρόμων με video (μπορείς να προσθέσεις κι άλλα στο μέλλον)
 dromoi_videos = {
-    "Φυσικό Μινόρε": "fysiko_minore_2.mp4"
+    "Φυσικό Μινόρε": "fysiko_minore_2.mp4",
+    "Αρμονικό Μινόρε": "armoniko_minore_1.mp4"
 }
 
 # Επίπεδη λίστα όλων των δρόμων (για χρήση στο Quiz)
