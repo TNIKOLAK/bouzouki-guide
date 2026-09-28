@@ -48,7 +48,18 @@ dromoi_videos = {
     "Φυσικό Μινόρε": "fysiko_minore_2.mp4",
     "Αρμονικό Μινόρε": "armoniko_minore_1.mp4",
     "Νιαβέντ": "niavent_1.mp4",
-    "Νικρίζ (Ποιμενικό Μινόρε)": "nikriz_1.mp4"  
+    "Νικρίζ (Ποιμενικό Μινόρε)": "nikriz_1.mp4",
+    "Χιτζάζ": "xitzaz.mp4",
+    "Χιτζασκιάρ": "xitzaskar_1.mp4",
+    "Πειραιώτικος": "peiraiotikos.mp4",
+    "Ραστ/Ματζόρε": "majore.mp4",
+    "Χουζάμ": "xouzam.mp4",
+    "Σεγκιάχ": "segiax.mp4",
+    "Ουσάκ": "ousak.mp4",
+    "Σαμπάχ": "sabax.mp4",
+    "Καρτσιγάρ": "kartsigar.mp4",
+    "Γιουρντί (Εκδοχή 1)": "giournti_1.mp4",
+    "Γιουρντί (Εκδοχή 2)": "giournti_2.mp4"    
 }
 
 # Επίπεδη λίστα όλων των δρόμων (για χρήση στο Quiz)
