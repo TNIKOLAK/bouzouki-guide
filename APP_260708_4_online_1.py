@@ -82,7 +82,9 @@ sximata = {
     "Χιτζάζ (5 Νότες)": "XITZAZ_5_notes.png",
     "Χιτζάζ (7 Νότες)": "XITZAZ_7_notes.png",
     "Χουζάμ (5 Νότες)": "XOUZAM_5_notes.png",
-    "Χουζάμ (7 Νότες)": "XOUZAM_7_notes.png"
+    "Χουζάμ (7 Νότες)": "XOUZAM_7_notes.png",
+    "Γιουρντί (9 Νότες Εκδοχή 1)": "GIOURNTI_9_notes_1.png",
+    "Γιουρντί (9 Νότες Εκδοχή 2)": "GIOURNTI_9_notes_2.png"     
 }
 
 # Δημιουργία των 4 Καρτελών (Tabs) στην κορυφή της ιστοσελίδας
