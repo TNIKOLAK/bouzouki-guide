@@ -38,8 +38,7 @@ oikogeneies_dromoi = {
     },
     "Οικογένεια Καρτσιγάρ": {
         "Καρτσιγάρ": "KARTSIGAR.png",
-        "Γιουρντί (Εκδοχή 1)": "GIOURNTI_9_notes_1.png",
-        "Γιουρντί (Εκδοχή 2)": "GIOURNTI_9_notes_2.png"
+        "Γιουρντί": "GIOURNTI_1.png"
     }
 }
 
@@ -58,8 +57,7 @@ dromoi_videos = {
     "Ουσάκ": "ousak.mp4",
     "Σαμπάχ": "sabax.mp4",
     "Καρτσιγάρ": "kartsigar.mp4",
-    "Γιουρντί (Εκδοχή 1)": "giournti_1.mp4",
-    "Γιουρντί (Εκδοχή 2)": "giournti_2.mp4"    
+    "Γιουρντί": "giournti_1.mp4"  
 }
 
 # Επίπεδη λίστα όλων των δρόμων (για χρήση στο Quiz)
