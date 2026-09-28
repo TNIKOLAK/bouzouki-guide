@@ -38,7 +38,7 @@ oikogeneies_dromoi = {
     },
     "Οικογένεια Καρτσιγάρ": {
         "Καρτσιγάρ": "KARTSIGAR.png",
-        "Γιουρντί": "GIOURNTI_1.png"
+        "Γιουρντί": "GKOURNTI_1.png"
     }
 }
 
