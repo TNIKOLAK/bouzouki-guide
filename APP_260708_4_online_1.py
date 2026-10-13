@@ -85,12 +85,18 @@ dromoi_videos = {
     "Γιουρντί": "giournti_1.mp4"  
 }
 
-# YouTube τραγούδια αποκλειστικά ανά δρόμο
+# YouTube τραγούδια ανά δρόμο (λίστα από λεξικά)
 dromoi_youtube_songs = {
-    "Νικρίζ (Ποιμενικό Μινόρε)": {
-        "title": "Ο Μάρκος πολυτεχνίτης του Μ. Βαμβακάρη - Δρόμος Νικρίζ",
-        "url": "https://www.youtube.com/watch?v=qZ01ridF_SA&t=2s"
-    }
+    "Νικρίζ (Ποιμενικό Μινόρε)": [
+        {
+            "title": "Ο Μάρκος πολυτεχνίτης του Μ. Βαμβακάρη - Δρόμος Νικρίζ",
+            "url": "https://www.youtube.com/watch?v=qZ01ridF_SA&t=2s"
+        },
+        {
+            "title": "Ο Θερμαστής του Γ. Μπάτη - Δρόμος Νικρίζ",
+            "url": "https://www.youtube.com/watch?v=Qx_w4P2bF18"
+        }
+    ]
 }
 
 # Επίπεδη λίστα όλων των δρόμων (για χρήση στο Quiz)
@@ -142,51 +148,53 @@ for group_members in omades_sximata.values():
     sximata_quiz_pool.update(group_members)
 
 # Δημιουργία των 4 Καρτελών (Tabs) στην κορυφή της ιστοσελίδας
-tab1, tab2, tab3, tab4 = st.tabs(["🎼 Μουσικοί Δρόμοι", "📐 Σχήματα / Εκδοχές", "🎲 Τεστ Δρόμων", "🎲 Τεστ Σχημάτων"]) 
+tab1, tab2, tab3, tab4 = st.tabs(["🎼 Μουσικοί Δρόμοι", "📐 Σχήματα / Εκδοχές", "🎲 Τεστ Δρόμων", "🎲 Τεστ Σχημάτων"])
 
 def ληψη_εικόνας(όνομα_αρχείου):
     """Βοηθητική συνάρτηση για ασφαλή φόρτωση εικόνας"""
-    if os.path.exists(όνομα_αρχείου): 
-        return Image.open(όνομα_αρχείου) 
+    if os.path.exists(όνομα_αρχείου):
+        return Image.open(όνομα_αρχείου)
     else:
-        return None 
+        return None
 
-# --- TAB 1: ΜΟΥΣΙΚΟΙ ΔΡΟΜΟΙ (Ιεραρχικά Dropdowns, Video & YouTube Τραγούδι) ---
+# --- TAB 1: ΜΟΥΣΙΚΟΙ ΔΡΟΜΟΙ (Ιεραρχικά Dropdowns, Video & YouTube Τραγούδια) ---
 with tab1:
     επιλογή_οικογένειας = st.selectbox(
         "Διαλέξτε Οικογένεια Δρόμων:", 
         list(oikogeneies_dromoi.keys()), 
         key="family_select"
-    ) 
+    )
     
-    διαθέσιμοι_δρόμοι = oikogeneies_dromoi[επιλογή_οικογένειας] 
+    διαθέσιμοι_δρόμοι = oikogeneies_dromoi[επιλογή_οικογένειας]
     επιλογή_δρόμου = st.selectbox(
         "Διαλέξτε Δρόμο:", 
         list(διαθέσιμοι_δρόμοι.keys()), 
         key="dromoi_select"
-    ) 
+    )
     
-    img = ληψη_εικόνας(διαθέσιμοι_δρόμοι[επιλογή_δρόμου]) 
-    if img: 
-        st.image(img, use_container_width=True) 
+    img = ληψη_εικόνας(διαθέσιμοι_δρόμοι[επιλογή_δρόμου])
+    if img:
+        st.image(img, use_container_width=True)
     else:
-        st.error(f"Δεν βρέθηκε η εικόνα: {διαθέσιμοι_δρόμοι[επιλογή_δρόμου]}") 
+        st.error(f"Δεν βρέθηκε η εικόνα: {διαθέσιμοι_δρόμοι[επιλογή_δρόμου]}")
 
     # 1. Τοπικό επεξηγηματικό video μαθήματος
-    if επιλογή_δρόμου in dromoi_videos: 
-        video_file = dromoi_videos[επιλογή_δρόμου] 
-        if os.path.exists(video_file): 
-            with st.expander("🎬 Δείτε το επεξηγηματικό video"): 
-                st.video(video_file) 
+    if επιλογή_δρόμου in dromoi_videos:
+        video_file = dromoi_videos[επιλογή_δρόμου]
+        if os.path.exists(video_file):
+            with st.expander("🎬 Δείτε το επεξηγηματικό video"):
+                st.video(video_file)
         else:
-            st.warning(f"Το video '{video_file}' δεν βρέθηκε στον φάκελο.") 
+            st.warning(f"Το video '{video_file}' δεν βρέθηκε στον φάκελο.")
 
-    # 2. YouTube Video αποκλειστικά για τον δρόμο Νικρίζ
+    # 2. YouTube Videos για χαρακτηριστικά τραγούδια
     if επιλογή_δρόμου in dromoi_youtube_songs:
-        song_data = dromoi_youtube_songs[επιλογή_δρόμου]
-        with st.expander("🎶 Χαρακτηριστικό τραγούδι στο δρόμο αυτό"):
-            st.markdown(f"**🎵 {song_data['title']}**")
-            st.video(song_data["url"])
+        songs_list = dromoi_youtube_songs[επιλογή_δρόμου]
+        with st.expander("🎶 Χαρακτηριστικά τραγούδια στο δρόμο αυτό"):
+            for song_data in songs_list:
+                st.markdown(f"**🎵 {song_data['title']}**")
+                st.video(song_data["url"])
+                st.markdown("---")
 
 # --- TAB 2: ΣΧΗΜΑΤΑ (Ιεραρχικά Dropdowns & Video) ---
 with tab2:
@@ -194,60 +202,60 @@ with tab2:
         "Διαλέξτε Ομάδα Σχημάτων:", 
         list(omades_sximata.keys()), 
         key="group_select"
-    ) 
+    )
     
-    διαθέσιμα_σχήματα = omades_sximata[επιλογή_ομάδας] 
+    διαθέσιμα_σχήματα = omades_sximata[επιλογή_ομάδας]
     επιλογή_σχήματος = st.selectbox(
         "Διαλέξτε Σχήμα / Παραλλαγή:", 
         list(διαθέσιμα_σχήματα.keys()), 
         key="sximata_select"
-    ) 
+    )
     
-    img_name = διαθέσιμα_σχήματα[επιλογή_σχήματος] 
-    img = ληψη_εικόνας(img_name) 
-    if img: 
-        st.image(img, use_container_width=True) 
+    img_name = διαθέσιμα_σχήματα[επιλογή_σχήματος]
+    img = ληψη_εικόνας(img_name)
+    if img:
+        st.image(img, use_container_width=True)
     else:
-        st.error(f"Δεν βρέθηκε η εικόνα: {img_name}") 
+        st.error(f"Δεν βρέθηκε η εικόνα: {img_name}")
 
     # Αυτόματη αντιστοίχιση του video με βάση το όνομα της εικόνας αλλάζοντας την κατάληξη σε .mp4
-    video_file_sxima = img_name.replace(".png", ".mp4") 
-    if os.path.exists(video_file_sxima): 
-        with st.expander("🎬 Δείτε το επεξηγηματικό video"): 
-            st.video(video_file_sxima) 
+    video_file_sxima = img_name.replace(".png", ".mp4")
+    if os.path.exists(video_file_sxima):
+        with st.expander("🎬 Δείτε το επεξηγηματικό video"):
+            st.video(video_file_sxima)
 
 # --- TAB 3: ΤΕΣΤ ΔΡΟΜΩΝ ---
 with tab3:
-    st.subheader("🎲 Τυχαία Εξάσκηση στους Δρόμους") 
-    if st.button("🎲 Νέα Τυχαία Επιλογή Δρόμου", key="btn_quiz_d"): 
-        st.session_state.quiz_nota_d = random.choice(notes) 
-        st.session_state.quiz_name_d = random.choice(list(dromoi_quiz_pool.keys())) 
-        st.session_state.show_img_d = False 
+    st.subheader("🎲 Τυχαία Εξάσκηση στους Δρόμους")
+    if st.button("🎲 Νέα Τυχαία Επιλογή Δρόμου", key="btn_quiz_d"):
+        st.session_state.quiz_nota_d = random.choice(notes)
+        st.session_state.quiz_name_d = random.choice(list(dromoi_quiz_pool.keys()))
+        st.session_state.show_img_d = False
     
-    if "quiz_nota_d" in st.session_state: 
-        st.info(f"**ΠΑΙΞΤΕ:** Νότα **{st.session_state.quiz_nota_d}** και Δρόμο **{st.session_state.quiz_name_d}**") 
-        if st.button("👁️ Εμφάνιση Απάντησης / Δακτυλοθεσίας", key="btn_show_d"): 
-            st.session_state.show_img_d = True 
+    if "quiz_nota_d" in st.session_state:
+        st.info(f"**ΠΑΙΞΤΕ:** Νότα **{st.session_state.quiz_nota_d}** και Δρόμο **{st.session_state.quiz_name_d}**")
+        if st.button("👁️ Εμφάνιση Απάντησης / Δακτυλοθεσίας", key="btn_show_d"):
+            st.session_state.show_img_d = True
             
-        if st.session_state.get("show_img_d", False): 
-            img = ληψη_εικόνας(dromoi_quiz_pool[st.session_state.quiz_name_d]) 
-            if img: 
-                st.image(img, use_container_width=True) 
+        if st.session_state.get("show_img_d", False):
+            img = ληψη_εικόνας(dromoi_quiz_pool[st.session_state.quiz_name_d])
+            if img:
+                st.image(img, use_container_width=True)
 
 # --- TAB 4: ΤΕΣΤ ΣΧΗΜΑΤΩΝ ---
 with tab4:
-    st.subheader("🎲 Τυχαία Εξάσκηση στα Σχήματα") 
-    if st.button("🎲 Νέα Τυχαία Επιλογή Σχήματος", key="btn_quiz_s"): 
-        st.session_state.quiz_nota_s = random.choice(notes) 
-        st.session_state.quiz_name_s = random.choice(list(sximata_quiz_pool.keys())) 
-        st.session_state.show_img_s = False 
+    st.subheader("🎲 Τυχαία Εξάσκηση στα Σχήματα")
+    if st.button("🎲 Νέα Τυχαία Επιλογή Σχήματος", key="btn_quiz_s"):
+        st.session_state.quiz_nota_s = random.choice(notes)
+        st.session_state.quiz_name_s = random.choice(list(sximata_quiz_pool.keys()))
+        st.session_state.show_img_s = False
         
-    if "quiz_nota_s" in st.session_state: 
-        st.success(f"**ΠΑΙΞΤΕ:** Νότα **{st.session_state.quiz_nota_s}** και Σχήμα **{st.session_state.quiz_name_s}**") 
+    if "quiz_nota_s" in st.session_state:
+        st.success(f"**ΠΑΙΞΤΕ:** Νότα **{st.session_state.quiz_nota_s}** και Σχήμα **{st.session_state.quiz_name_s}**")
         if st.button("👁️ Εμφάνιση Απάντησης / Δακτυλοθεσίας", key="btn_show_s"):
-            st.session_state.show_img_s = True 
+            st.session_state.show_img_s = True
             
-        if st.session_state.get("show_img_s", False): 
+        if st.session_state.get("show_img_s", False):
             img = ληψη_εικόνας(sximata_quiz_pool[st.session_state.quiz_name_s])
-            if img: 
-                st.image(img, use_container_width=True) 
+            if img:
+                st.image(img, use_container_width=True)
