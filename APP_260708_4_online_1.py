@@ -109,7 +109,11 @@ dromoi_youtube_songs = {
         {
             "title": "Εγώ Μάγκας Φαινόμουνα - του Μ. Βαμβακάρη - Δρόμος Ουσάκ",
             "url": "https://youtu.be/luUzPuX8nwI"
-        }
+        },
+        {
+            "title": "Οι μάγκες δεν υπάρχουν πια - του Ν. Παπάζογλου - Δρόμος Ουσάκ",
+            "url": "https://youtu.be/jSmPR1CwZqk"
+        }        
     ],
     
     "Χιτζάζ": [
