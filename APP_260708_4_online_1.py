@@ -104,6 +104,13 @@ dromoi_youtube_songs = {
             "url": "https://www.youtube.com/watch?v=Qx_w4P2bF18"
         }
     ]
+    
+    "Ουσάκ": [
+        {
+            "title": "Εγώ Μάγκας Φαινόμουνα - του Μ. Βαμβακάρη - Δρόμος Ουσάκ",
+            "url": "https://youtu.be/luUzPuX8nwI"
+        }
+    ]    
 }
 
 # Επίπεδη λίστα όλων των δρόμων (για χρήση στο Quiz)
