@@ -127,6 +127,23 @@ dromoi_youtube_songs = {
         {
             "title": "Σήκω Χόρεψε Κουκλί Μου - Δρόμος Ραστ/Ματζόρε",
             "url": "https://youtu.be/sN2qVlu5WFw"
+        },
+        {
+            "section_title": "Συνεφιασμένη Κυριακή",
+            "videos": [
+                {
+                    "title": "Συνεφιασμένη Κυριακή 1 - εισαγωγή Ματζόρε-Ραστ δρόμος.mp4",
+                    "url": "https://youtu.be/_Lxm_7MwtbY"
+                },
+                {
+                    "title": "Συνεφιασμένη Κυριακή 2 - λόγια Ματζόρε-Ραστ δρόμος.mp4",
+                    "url": "https://youtu.be/tpqmZW0gzQA"
+                },
+                {
+                    "title": "Συνεφιασμένη Κυριακή 3 - ολόκληρο με μετρονόμο Ματζόρε-Ραστ δρόμος.mp4",
+                    "url": "https://youtu.be/dr_dE5z_FIs"
+                }
+            ]
         }
     ]    
 }
@@ -223,10 +240,17 @@ with tab1:
     if επιλογή_δρόμου in dromoi_youtube_songs:
         songs_list = dromoi_youtube_songs[επιλογή_δρόμου]
         with st.expander("🎶 Χαρακτηριστικά τραγούδια στο δρόμο αυτό"):
-            for song_data in songs_list:
-                st.markdown(f"**🎵 {song_data['title']}**")
-                st.video(song_data["url"])
-                st.markdown("---")
+            for item in songs_list:
+                if "videos" in item:
+                    with st.expander(f"🎵 {item['section_title']}"):
+                        for vid in item["videos"]:
+                            st.markdown(f"**{vid['title']}**")
+                            st.video(vid["url"])
+                            st.markdown("---")
+                else:
+                    st.markdown(f"**🎵 {item['title']}**")
+                    st.video(item["url"])
+                    st.markdown("---")
 
 # --- TAB 2: ΣΧΗΜΑΤΑ (Ιεραρχικά Dropdowns & Video) ---
 with tab2:
