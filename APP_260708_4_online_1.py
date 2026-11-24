@@ -35,7 +35,7 @@ with col_credits:
             <div>🎼 <b>Μουσική επιμέλεια:</b><br>&nbsp;&nbsp;&nbsp;&nbsp;Θοδωρής Τζινέλλης</div>
             <div style="margin-top: 6px;">💻 <b>Ανάπτυξη εφαρμογής:</b><br>&nbsp;&nbsp;&nbsp;&nbsp;Θανάσης Νικολακόπουλος</div>
             <hr style="margin: 7px 0; border: 0; border-top: 1px solid rgba(255, 255, 255, 0.12);">
-            <div style="font-size: 0.73rem; opacity: 0.75;">🕒 <i>Τελ. τροποποίηση: 25/10/2026</i></div>
+            <div style="font-size: 0.73rem; opacity: 0.75;">🕒 <i>Τελ. τροποποίηση: 24/11/2026</i></div>
         </div>
         """,
         unsafe_allow_html=True
